@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "phpoffice/phpword": "^0.15.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

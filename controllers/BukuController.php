@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use PhpOffice\PhpWord\IOfactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Converter;
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -152,4 +155,163 @@ class BukuController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionExportWord()
+    {
+        $phpWord = new PhpWord();
+        $phpWord->setDefaultFontSize(11);
+
+        $section = $phpWord->addSection([
+            'marginTop' => Converter::cmToTwip(1.80),
+            'marginBottom' => Converter::cmToTwip(1.30),
+            'marginLeft' => Converter::cmToTwip(1.2),
+            'marginRight' => Converter::cmToTwip(1.6),
+        ]);
+        
+        $fontStyle = [
+            'underline' => 'dash',
+            'bold' => 'true',
+            'italic' => 'true',
+        ];
+
+        $paragraphCenter = [
+            'alignment' => 'center',
+        ];
+
+        $section->addText(
+            'Jadwal Pengadaan Langsung',
+            $fontStyle,
+            $paragraphCenter
+        );
+
+        $judul = $section->addTextRun($paragraphCenter);
+
+        $judul->addText('Pengadaan jasa', $fontStyle);
+        $judul->addText(' Konsultasi', ['italic' => true]);
+        $judul->addText(' Sistem Informasi', ['bold' => true]);
+
+        // $section->addText(
+        //     'teks 1 2 3',
+        //     ['bold' => true],
+        //     ['alignment' => 'center']
+        // );
+
+        // $semuaBuku = Buku::find()->all();
+        // foreach ($semuaBuku as $buku) {
+        //     $section->addText($buku->nama);
+        // }
+
+        /*
+        $section->addListItem('List Item I', 0);
+        $section->addListItem('List Item I.a', 1);
+        $section->addListItem('List Item I.b', 1);
+        $section->addListItem('List Item II', 0);
+        */
+
+        $filename = time() . 'document-buku.docx';
+        $path = 'dokumen/' . $filename;
+        $xmlWriter = IOfactory::createWriter($phpWord, 'Word2007');
+        $xmlWriter->save($path);
+        return $this->redirect($path);
+    }
+
+    public function actionJadwalPl()
+    {
+        $phpWord = new PhpWord();
+
+        //Font Size untuk seluruh text
+        $phpWord->setDefaultFontSize(11);
+
+        //Font Style untk seluruh text
+        $phpWord->setDefaultFontName('Gentium Basic');
+
+        //Margin kertas
+        $section = $phpWord->addSection([
+            'marginTop' => Converter::cmToTwip(1.80),
+            'marginBottom' => Converter::cmToTwip(1.30),
+            'marginLeft' => Converter::cmToTwip(1.2),
+            'marginRight' => Converter::cmToTwip(1.6),
+        ]);
+        
+        $headerStyle = [
+            'bold' => true,
+        ];
+        $paragraphCenter = [
+            'alignment' => 'center',
+            'spacing' => 0,
+        ];
+        $section->addText(
+            'JADWAL PENGADAAN LANGSUNG',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addText(
+            'PENGADAAN JASA KONSULTASI',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addTextBreak(1);
+        $section->addText(
+            'PEJABAT PENGADAAN BARANG/JASA',
+            $headerStyle,
+            [
+                'alignment' => 'left'
+            ]
+        );
+        $section->addText(
+            'SATKER 450417 LAN JAKARTA',
+            $headerStyle,
+            [
+                'alignment' => 'left'
+            ]
+        );
+        $section->addTextBreak(1);
+        $section->addText(
+            'PEKERJAAN PEMBANGUNAN SISTEM INFORMASI PENGADAAN (SIP) KANTOR LAN JAKARTA ',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addTextBreak(1);
+        $section->addText(
+            'PAGU DANA  :   Rp. 12.000.000,-',
+            $headerStyle,
+            [
+                'alignment' => 'left'
+            ]
+        );
+        $section->addText(
+            'HPS       : Rp. 11.000.000,- ',
+            $headerStyle,
+            [
+                'alignment' => 'left'
+            ]
+        );
+        $table = $section->addTable([
+            'alignment' => 'center', 
+            'bgColor' => '000000',
+            'borderSize' => 6,
+        ]);
+         
+        $table->addRow(null);
+        $table->addCell(500)->addText('NO', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('KEGIATAN', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('TGL', $headerStyle, $paragraphCenter);
+        $table->addCell(2000)->addText('NOMOR', $headerStyle, $paragraphCenter);
+
+        $semuaBuku = Buku::find()->all();
+        $nomor = 1;
+        foreach ($semuaBuku as $buku) {
+            $table->addRow(null);
+            $table->addCell(500)->addText($nomor++, null, $paragraphCenter);
+            $table->addCell(5000)->addText($buku->nama, null);
+            $table->addCell(5000)->addText($buku->tahun_terbit, null, $paragraphCenter);
+            $table->addCell(2000)->addText($buku->getKategori(), null, $paragraphCenter);
+        }
+
+        $filename = time() . 'Jadwal-PL.docx';
+        $lokasi = 'dokumen/' . $filename;
+        $xmlWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        $xmlWriter->save($lokasi);
+        return $this->redirect($lokasi);
+}
 }

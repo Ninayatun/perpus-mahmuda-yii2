@@ -100,20 +100,6 @@ class Buku extends \yii\db\ActiveRecord
     {
         return \yii\helpers\ArrayHelper::map(self::find()->all(), 'id', 'nama');
     }
-    // public function getPenulis()
-    // {
-    //     return $this->hasOne(Penulis::className(), ['id' => 'id_penulis']);
-    // }
-
-    // public function getPenerbit()
-    // {
-    //     return $this->hasOne(Penerbit::className(), ['id' => 'id_penerbit']);
-    // }
-
-    // public function getKategori()
-    // {
-    //     return $this->hasOne(Kategori::className(), ['id' => 'id_kategori']);
-    // }
 
     public static function hallo()
     {

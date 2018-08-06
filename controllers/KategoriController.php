@@ -8,6 +8,9 @@ use app\models\KategoriSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use PhpOffice\PhpWord\IOfactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Converter;
 
 /**
  * KategoriController implements the CRUD actions for Kategori model.
@@ -124,4 +127,66 @@ class KategoriController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionDaftarKategori()
+    {
+        $phpWord = new PhpWord();
+
+        //Font Size untuk seluruh text
+        $phpWord->setDefaultFontSize(11);
+
+        //Font Style untk seluruh text
+        $phpWord->setDefaultFontName('Gentium Basic');
+
+        //Margin kertas
+        $section = $phpWord->addSection([
+            'marginTop' => Converter::cmToTwip(1.80),
+            'marginBottom' => Converter::cmToTwip(1.30),
+            'marginLeft' => Converter::cmToTwip(1.2),
+            'marginRight' => Converter::cmToTwip(1.6),
+        ]);
+        
+        $headerStyle = [
+            'bold' => true,
+        ];
+        $paragraphCenter = [
+            'alignment' => 'center',
+            'spacing' => 0,
+        ];
+        $section->addText(
+            'DAFTAR KATEGORI BUKU',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addText(
+            'PERPUSTAKAAN PPI',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addTextBreak(1);
+        
+        $table = $section->addTable([
+            'alignment' => 'center', 
+            'bgColor' => '000000',
+            'borderSize' => 6,
+        ]);
+        $table->addRow(null);
+        $table->addCell(500)->addText('NO', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('NAMA KATEGORI', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('JUMLAH BUKU', $headerStyle, $paragraphCenter);
+
+        $semuaKategori = Kategori::find()->all();
+        $nomor = 1;
+        foreach ($semuaKategori as $kategori) {
+            $table->addRow(null);
+            $table->addCell(500)->addText($nomor++, null, $paragraphCenter);
+            $table->addCell(5000)->addText($kategori->nama, null);
+            $table->addCell(5000)->addText($kategori->getJumlahBuku(), null, $paragraphCenter);
+        }
+        $filename = time() . 'Daftar-Kategori.docx';
+        $lokasi = 'dokumen/' . $filename;
+        $xmlWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        $xmlWriter->save($lokasi);
+        return $this->redirect($lokasi);
+}
 }

@@ -8,7 +8,9 @@ use app\models\PenerbitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use PhpOffice\PhpWord\IOfactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Converter;
 /**
  * PenerbitController implements the CRUD actions for Penerbit model.
  */
@@ -124,4 +126,72 @@ class PenerbitController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionDaftarPenerbit()
+    {
+        $phpWord = new PhpWord();
+
+        //Font Size untuk seluruh text
+        $phpWord->setDefaultFontSize(11);
+
+        //Font Style untk seluruh text
+        $phpWord->setDefaultFontName('Gentium Basic');
+
+        //Margin kertas
+        $section = $phpWord->addSection([
+            'marginTop' => Converter::cmToTwip(1.80),
+            'marginBottom' => Converter::cmToTwip(1.30),
+            'marginLeft' => Converter::cmToTwip(1.2),
+            'marginRight' => Converter::cmToTwip(1.6),
+        ]);
+        
+        $headerStyle = [
+            'bold' => true,
+        ];
+        $paragraphCenter = [
+            'alignment' => 'center',
+            'spacing' => 0,
+        ];
+        $section->addText(
+            'DAFTAR PENERBIT BUKU',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addText(
+            'PERPUSTAKAAN PPI',
+            $headerStyle,
+            $paragraphCenter
+        );
+        $section->addTextBreak(1);
+        
+        $table = $section->addTable([
+            'alignment' => 'center', 
+            'bgColor' => '000000',
+            'borderSize' => 6,
+        ]);
+        $table->addRow(null);
+        $table->addCell(500)->addText('NO', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('NAMA PENERBIT', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('ALAMAT', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('TELEPON', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('EMAIL', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('JUMLAH BUKU', $headerStyle, $paragraphCenter);
+
+        $semuaPenerbit = Penerbit::find()->all();
+        $nomor = 1;
+        foreach ($semuaPenerbit as $penerbit) {
+            $table->addRow(null);
+            $table->addCell(500)->addText($nomor++, null, $paragraphCenter);
+            $table->addCell(5000)->addText($penerbit->nama, null);
+            $table->addCell(5000)->addText($penerbit->alamat, null);
+            $table->addCell(5000)->addText($penerbit->telepon, null);
+            $table->addCell(5000)->addText($penerbit->email, null);
+            $table->addCell(5000)->addText($penerbit->getJumlahBuku(), null, $paragraphCenter);
+        }
+        $filename = time() . 'Daftar-Penerbit.docx';
+        $lokasi = 'dokumen/' . $filename;
+        $xmlWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        $xmlWriter->save($lokasi);
+        return $this->redirect($lokasi);
+}
 }

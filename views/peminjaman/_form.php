@@ -13,7 +13,7 @@ use app\models\Anggota;
 ?>
 
 <div class="peminjaman-form">
-
+ 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'id_buku')->widget(Select2::classname(), [

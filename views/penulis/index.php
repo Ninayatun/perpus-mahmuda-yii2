@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Tambah Penulis', ['create'], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('Export Word', ['penulis/daftar-penulis'], ['class' => 'btn btn-info btn-flat']); ?>
     </p>
 
     <?= GridView::widget([
