@@ -308,6 +308,8 @@ class BukuController extends Controller
             $table->addCell(5000)->addText($buku->tahun_terbit, null, $paragraphCenter);
             $table->addCell(2000)->addText($buku->getKategori(), null, $paragraphCenter);
         }
+        
+
 
         $filename = time() . 'Jadwal-PL.docx';
         $lokasi = 'dokumen/' . $filename;

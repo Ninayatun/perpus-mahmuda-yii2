@@ -57,4 +57,9 @@ class Anggota extends \yii\db\ActiveRecord
             'status_aktif' => 'Status Aktif',
         ];
     }
+
+    public static function getCount()
+    {
+        return static::find()->count();
+    }
 }

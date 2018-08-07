@@ -48,4 +48,9 @@ class Petugas extends \yii\db\ActiveRecord
             'email' => 'Email',
         ];
     }
+
+    public static function getCount()
+    {
+        return static::find()->count();
+    }
 }

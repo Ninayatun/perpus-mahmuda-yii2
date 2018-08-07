@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class AnggotaController extends Controller
 {
+    public $layout = 'main';
     /**
      * {@inheritdoc}
      */

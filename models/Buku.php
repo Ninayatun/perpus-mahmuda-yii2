@@ -101,20 +101,25 @@ class Buku extends \yii\db\ActiveRecord
         return \yii\helpers\ArrayHelper::map(self::find()->all(), 'id', 'nama');
     }
 
-    public static function hallo()
+    public static function getCount()
     {
-        return "Selamat Datang";
+        return static::find()->count();
     }
 
-    public static function hallolagi()
-    {
-        return "Selamat Datang Lagi";
-    }
+    // public static function hallo()
+    // {
+    //     return "Selamat Datang";
+    // }
 
-    public function halo()
-    {
-        return "haiiii";
-    }
+    // public static function hallolagi()
+    // {
+    //     return "Selamat Datang Lagi";
+    // }
+
+    // public function halo()
+    // {
+    //     return "haiiii";
+    // }
 
 
 }

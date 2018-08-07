@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class PetugasController extends Controller
 {
+    public $layout = 'main';
     /**
      * {@inheritdoc}
      */

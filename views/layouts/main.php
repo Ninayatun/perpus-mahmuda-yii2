@@ -37,14 +37,14 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
             <div class="left_col scroll-view">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Perpustakaan</span></a>
+                    <a href="/" class="site_title"><i class="fa fa-book"></i> <span>Perpustakaan</span></a>
                 </div>
                 <div class="clearfix"></div>
 
                 <!-- menu prile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="http://placehold.it/128x128" alt="..." class="img-circle profile_img">
+                        <img src="../web/img/photo.png" height="60px" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -59,76 +59,78 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <h3>General</h3>
+                        <div>&nbsp;</div>
                         <?=
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
-                                    ["label" => "Home", "url" => "site/index", "icon" => "home"],
+                                    ["label" => "Home", "url" => ["site/index"], "icon" => "home"],
+                                    ["label" => "Anggota", "url" => ["anggota/index"], "icon" => "users"],
+                                    ["label" => "Petugas", "url" => ["petugas/index"], "icon" => "user "],
                                     ["label" => "Buku", "url" => ["buku/index"], "icon" => "book"],
                                     ["label" => "Kategori", "url" => ["kategori/index"], "icon" => "list"],
                                     ["label" => "Penulis", "url" => ["penulis/index"], "icon" => "user"],
                                     ["label" => "Penerbit", "url" => ["penerbit/index"], "icon" => "building"],
                                     ["label" => "Peminjaman", "url" => ["peminjaman/index"], "icon" => "list-alt"],
                                     // ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
-                                    [
-                                        "label" => "Widgets",
-                                        "icon" => "th",
-                                        "url" => "#",
-                                        "items" => [
-                                            ["label" => "Menu", "url" => ["site/menu"]],
-                                            ["label" => "Panel", "url" => ["site/panel"]],
-                                        ],
-                                    ],
-                                    [
-                                        "label" => "Badges",
-                                        "url" => "#",
-                                        "icon" => "table",
-                                        "items" => [
-                                            [
-                                                "label" => "Default",
-                                                "url" => "#",
-                                                "badge" => "123",
-                                            ],
-                                            [
-                                                "label" => "Success",
-                                                "url" => "#",
-                                                "badge" => "new",
-                                                "badgeOptions" => ["class" => "label-success"],
-                                            ],
-                                            [
-                                                "label" => "Danger",
-                                                "url" => "#",
-                                                "badge" => "!",
-                                                "badgeOptions" => ["class" => "label-danger"],
-                                            ],
-                                        ],
-                                    ],
-                                    [
-                                        "label" => "Multilevel",
-                                        "url" => "#",
-                                        "icon" => "table",
-                                        "items" => [
-                                            [
-                                                "label" => "Second level 1",
-                                                "url" => "#",
-                                            ],
-                                            [
-                                                "label" => "Second level 2",
-                                                "url" => "#",
-                                                "items" => [
-                                                    [
-                                                        "label" => "Third level 1",
-                                                        "url" => "#",
-                                                    ],
-                                                    [
-                                                        "label" => "Third level 2",
-                                                        "url" => "#",
-                                                    ],
-                                                ],
-                                            ],
-                                        ],
-                                    ],
+                                    // [
+                                    //     "label" => "Widgets",
+                                    //     "icon" => "th",
+                                    //     "url" => "#",
+                                    //     "items" => [
+                                    //         ["label" => "Menu", "url" => ["site/menu"]],
+                                    //         ["label" => "Panel", "url" => ["site/panel"]],
+                                    //     ],
+                                    // ],
+                                    // [
+                                    //     "label" => "Badges",
+                                    //     "url" => "#",
+                                    //     "icon" => "table",
+                                    //     "items" => [
+                                    //         [
+                                    //             "label" => "Default",
+                                    //             "url" => "#",
+                                    //             "badge" => "123",
+                                    //         ],
+                                    //         [
+                                    //             "label" => "Success",
+                                    //             "url" => "#",
+                                    //             "badge" => "new",
+                                    //             "badgeOptions" => ["class" => "label-success"],
+                                    //         ],
+                                    //         [
+                                    //             "label" => "Danger",
+                                    //             "url" => "#",
+                                    //             "badge" => "!",
+                                    //             "badgeOptions" => ["class" => "label-danger"],
+                                    //         ],
+                                    //     ],
+                                    // ],
+                                    // [
+                                    //     "label" => "Multilevel",
+                                    //     "url" => "#",
+                                    //     "icon" => "table",
+                                    //     "items" => [
+                                    //         [
+                                    //             "label" => "Second level 1",
+                                    //             "url" => "#",
+                                    //         ],
+                                    //         [
+                                    //             "label" => "Second level 2",
+                                    //             "url" => "#",
+                                    //             "items" => [
+                                    //                 [
+                                    //                     "label" => "Third level 1",
+                                    //                     "url" => "#",
+                                    //                 ],
+                                    //                 [
+                                    //                     "label" => "Third level 2",
+                                    //                     "url" => "#",
+                                    //                 ],
+                                    //             ],
+                                    //         ],
+                                    //     ],
+                                    // ],
                                 ],
                             ]
                         )
@@ -169,7 +171,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="http://placehold.it/128x128" alt="">Mahmuda
+                                <img src="../web/img/photo.png" alt="">Mahmuda
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -184,84 +186,10 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                 <li>
                                     <a href="javascript:;">Help</a>
                                 </li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                <li><a href="../views/site/login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">6</span>
-                            </a>
-                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                <li>
-                                    <a>
-                      <span class="image">
-                                        <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>Nur Inayatun Mahmuda</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                      <span class="image">
-                                        <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                      <span class="image">
-                                        <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                      <span class="image">
-                                        <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="text-center">
-                                        <a href="/">
-                                            <strong>See All Alerts</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-
                     </ul>
                 </nav>
             </div>

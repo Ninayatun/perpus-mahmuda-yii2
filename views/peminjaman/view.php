@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                   return $data->getAnggota();
                 }
             ],
-            'id_anggota',
             'tanggal_pinjam',
             'tanggal_kembali',
         ],
