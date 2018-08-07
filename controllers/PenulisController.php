@@ -17,6 +17,7 @@ use PhpOffice\PhpWord\Shared\Converter;
  */
 class PenulisController extends Controller
 {
+    public $layout = 'main';
     /**
      * {@inheritdoc}
      */

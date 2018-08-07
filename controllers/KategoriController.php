@@ -17,6 +17,7 @@ use PhpOffice\PhpWord\Shared\Converter;
  */
 class KategoriController extends Controller
 {
+    public $layout = 'main';
     /**
      * {@inheritdoc}
      */

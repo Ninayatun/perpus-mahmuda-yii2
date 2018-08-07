@@ -18,6 +18,7 @@ use PhpOffice\PhpWord\Shared\Converter;
  */
 class BukuController extends Controller
 {
+    public $layout = 'main';
     /**
      * {@inheritdoc}
      */
