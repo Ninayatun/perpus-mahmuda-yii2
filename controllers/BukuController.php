@@ -103,25 +103,37 @@ class BukuController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+        public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        // Mengambi data lama di databases
+        $sampul_lama = $model->sampul;
+        $berkas_lama = $model->berkas;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
+            
+            // Mengambil data baru di layout _from
             $sampul = UploadedFile::getInstance($model, 'sampul');
             $berkas = UploadedFile::getInstance($model, 'berkas');
-
-            $model->sampul = time() . '_' . $sampul->name;
-            $model->berkas = time() . '_' . $berkas->name;
-
+            // Jika ada data file yang dirubah maka data lama akan di hapus dan di ganti dengan data baru yang sudah diambil jika tidak ada data yang dirubah maka file akan langsung save data-data yang lama.
+            if ($sampul !== null) {
+                unlink(Yii::$app->basePath . '/web/upload/sampul' . $sampul_lama);
+                $model->sampul = time() . '_' . $sampul->name;
+                $sampul->saveAs(Yii::$app->basePath . '/web/upload/sampul' . $model->sampul);
+            } else {
+                $model->sampul = $sampul_lama;
+            }
+            if ($berkas !== null) {
+                unlink(Yii::$app->basePath . '/web/upload/berkas' . $berkas_lama);
+                $model->berkas = time() . '_' . $berkas->name;
+                $berkas->saveAs(Yii::$app->basePath . '/web/upload/berkas' . $model->berkas);
+            } else {
+                $model->berkas = $berkas_lama;
+            }
+            // Simapan data ke databases
             $model->save(false);
-
-            $sampul->saveAs(Yii::$app->basePath . '/web/upload/sampul/' . $model->sampul);
-            $berkas->saveAs(Yii::$app->basePath . '/web/upload/berkas/' . $model->berkas);
-
+            // Menuju ke view id yang data dibuat.
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        
         return $this->render('update', [
             'model' => $model,
         ]);

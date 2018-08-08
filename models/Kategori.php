@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "kategori".
@@ -65,5 +66,19 @@ class Kategori extends \yii\db\ActiveRecord
             ->andWhere(['id_kategori' => $this->id])
             ->orderBy(['nama' => SORT_DESC])
             ->all();
+    }
+
+    public function getManyBuku()
+    {
+        return $this->hasMany(Buku::class, ['id_kategori' => 'id']);
+    }
+
+    public static function getGrafikList()
+    {
+        $data = [];
+        foreach (static::find()->all() as $kategori) {
+            $data[] = [StringHelper::truncate($kategori->nama, 20), (int) $kategori->getManyBuku()->count()];
+        }
+        return $data;
     }
 }

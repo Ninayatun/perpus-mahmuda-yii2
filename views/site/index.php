@@ -5,6 +5,8 @@ use app\models\Buku;
 use app\models\Anggota;
 use app\models\Petugas;
 use app\models\Peminjaman;
+use app\models\Kategori;
+use miloschuman\highcharts\Highcharts;
 /* @var $this yii\web\View */
 
 $this->title = 'Perpustakaan';
@@ -45,5 +47,36 @@ $this->title = 'Perpustakaan';
                 </div>
               </div>
             </div>
+
+<div class="row">
+      <div class="col-sm-6">
+        
+            <div class="box-header with-border">
+                <h3 class="box-title">Buku Berdasarkan Kategori</h3>
+            </div>
+            <div class="box-body">
+                <?=Highcharts::widget([
+                    'options' => [
+                        'credits' => false,
+                        'title' => ['text' => 'KATEGORI BUKU'],
+                        'exporting' => ['enabled' => true],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'pie',
+                                'name' => 'Kategori',
+                                'data' => Kategori::getGrafikList(),
+                            ],
+                        ],
+                    ],
+                ]);?>
+            </div>
+
+    </div>
+</div>
     
 </div>
