@@ -67,21 +67,19 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                     ["label" => "Home", "url" => ["site/index"], "icon" => "home"],
                                     ["label" => "Anggota", "url" => ["anggota/index"], "icon" => "users"],
                                     ["label" => "Petugas", "url" => ["petugas/index"], "icon" => "user "],
-                                    ["label" => "Buku", "url" => ["buku/index"], "icon" => "book"],
-                                    ["label" => "Kategori", "url" => ["kategori/index"], "icon" => "list"],
-                                    ["label" => "Penulis", "url" => ["penulis/index"], "icon" => "user"],
-                                    ["label" => "Penerbit", "url" => ["penerbit/index"], "icon" => "building"],
+                                    [
+                                        "label" => "Master Buku",
+                                        "icon" => "th",
+                                        "url" => "#",
+                                        "items" => [
+                                            ["label" => "Buku", "url" => ["buku/index"], "icon" => "book"],
+                                            ["label" => "Kategori", "url" => ["kategori/index"], "icon" => "list"],
+                                            ["label" => "Penulis", "url" => ["penulis/index"], "icon" => "user"],
+                                            ["label" => "Penerbit", "url" => ["penerbit/index"], "icon" => "building"],
+                                        ],
+                                    ],
                                     ["label" => "Peminjaman", "url" => ["peminjaman/index"], "icon" => "list-alt"],
-                                    // ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
-                                    // [
-                                    //     "label" => "Widgets",
-                                    //     "icon" => "th",
-                                    //     "url" => "#",
-                                    //     "items" => [
-                                    //         ["label" => "Menu", "url" => ["site/menu"]],
-                                    //         ["label" => "Panel", "url" => ["site/panel"]],
-                                    //     ],
-                                    // ],
+                                    ["label" => "Logout", "url" => ["site/logout"], "icon" => "sign-out"],
                                     // [
                                     //     "label" => "Badges",
                                     //     "url" => "#",
