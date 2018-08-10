@@ -59,16 +59,21 @@ class Buku extends \yii\db\ActiveRecord
         ];
     }
 
+    // public function getPenulis()
+    // {
+    //     $model = Penulis::findOne($this->id_penulis);
+
+    //     if ($model != null){
+    //         return $model->nama;
+    //     } else {
+    //         return null;
+    //     }
+
+    // }
+
     public function getPenulis()
     {
-        $model = Penulis::findOne($this->id_penulis);
-
-        if ($model != null){
-            return $model->nama;
-        } else {
-            return null;
-        }
-
+        return $this->hasOne(Penulis::class, ['id' => 'id_penulis']);
     }
 
     public function getPenerbit()
