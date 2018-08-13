@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use app\models\Anggota;
+use app\models\Petugas;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -16,9 +19,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_anggota')->textInput() ?>
+    <?= $form->field($model, 'id_anggota')->widget(Select2::classname(), [
+            'data' =>  Anggota::getList(),
+            'options' => [
+              'placeholder' => '- Pilih Anggota -',
+            ],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
-    <?= $form->field($model, 'id_petugas')->textInput() ?>
+    <?= $form->field($model, 'id_petugas')->widget(Select2::classname(), [
+            'data' =>  Petugas::getList(),
+            'options' => [
+              'placeholder' => '- Pilih Petugas -',
+            ],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
     <?= $form->field($model, 'id_user_role')->textInput() ?>
 
