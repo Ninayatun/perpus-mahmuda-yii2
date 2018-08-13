@@ -22,8 +22,6 @@ use dosamigos\tinymce\TinyMce;
 
     <?= $form->field($model, 'tahun_terbit')->textInput(['maxlength' => true]) ?>
 
-    <?php if ($model->id_penulis == null) { ?>
-
     <?= $form->field($model, 'id_penulis')->widget(Select2::classname(), [
             'data' =>  Penulis::getList(),
             'options' => [
@@ -34,10 +32,7 @@ use dosamigos\tinymce\TinyMce;
             ],
         ]); ?>
 
-    <?php } ?>
 
-    <?php 
-    if ($model->id_penerbit == null) { ?>
         <?= $form->field($model, 'id_penerbit')->widget(Select2::classname(), [
             'data' =>  Penerbit::getList(),
             'options' => [
@@ -47,11 +42,8 @@ use dosamigos\tinymce\TinyMce;
                 'allowClear' => true
             ],
         ]); ?>
-    <?php } ?>
 
-    <?php 
-        if ($model->id_kategori == null) { ?>
-            <?= $form->field($model, 'id_kategori')->widget(Select2::classname(), [
+        <?= $form->field($model, 'id_kategori')->widget(Select2::classname(), [
             'data' =>  Kategori::getList(),
             'options' => [
               'placeholder' => '- Pilih Kategori -',
@@ -59,8 +51,7 @@ use dosamigos\tinymce\TinyMce;
             'pluginOptions' => [
                 'allowClear' => true
             ],
-        ]); ?>
-    <?php   }  ?>   
+        ]); ?>   
 
     
 

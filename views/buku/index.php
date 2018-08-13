@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Penulis::getList(),
                 'value' => function($data)
                 {
-                  return $data->getPenulis();
+                  return $data->penulis->nama;
                 }
             ],
             [
