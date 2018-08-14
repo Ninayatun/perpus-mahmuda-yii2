@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use app\models\Anggota;
 use app\models\Petugas;
+use app\models\UserRole;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -39,7 +40,15 @@ use app\models\Petugas;
             ],
         ]); ?>
 
-    <?= $form->field($model, 'id_user_role')->textInput() ?>
+    <?= $form->field($model, 'id_user_role')->widget(Select2::classname(), [
+            'data' =>  UserRole::getList(),
+            'options' => [
+              'placeholder' => '- Pilih User Role -',
+            ],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 

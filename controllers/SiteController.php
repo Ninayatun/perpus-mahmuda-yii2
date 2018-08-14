@@ -12,7 +12,7 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    public $layout = 'main';
+    // public $layout = 'main';
     /**
      * {@inheritdoc}
      */
@@ -62,7 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // $this->layout = 'tes';
+        $this->layout = 'main';
 
         return $this->render('index');
     }
@@ -74,6 +74,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'main';
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

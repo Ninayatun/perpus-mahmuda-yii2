@@ -47,8 +47,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'id' => 'ID',
             'username' => 'Username',
             'password' => 'Password',
-            'id_anggota' => 'Id Anggota',
-            'id_petugas' => 'Id Petugas',
+            'id_anggota' => 'Anggota',
+            'id_petugas' => 'Petugas',
             'id_user_role' => 'Id User Role',
             'status' => 'Status',
         ];
@@ -87,5 +87,29 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function validatePassword($password) 
     {
         return self::findOne(['password' => $password]);
+    }
+
+    public function getAnggota()
+    {
+        $model = Anggota::findOne($this->id_anggota);
+
+        if ($model != null){
+            return $model->nama;
+        } else {
+            return null;
+        }
+
+    }
+
+    public function getPetugas()
+    {
+        $model = Petugas::findOne($this->id_petugas);
+
+        if ($model != null){
+            return $model->nama;
+        } else {
+            return null;
+        }
+
     }
 }
