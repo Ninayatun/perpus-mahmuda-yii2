@@ -8,6 +8,7 @@ use app\models\AnggotaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * AnggotaController implements the CRUD actions for Anggota model.

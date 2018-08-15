@@ -9,6 +9,9 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Buku;
+use Mpdf\Mpdf;
+
 
 class SiteController extends Controller
 {
@@ -130,4 +133,14 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionExportPdf()
+   {
+         $this->layout='main1';
+         $model = Buku::find()->All();
+         $mpdf=new mPDF();
+         $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
+         $mpdf->Output('DataBuku.pdf', 'D');
+         exit;
+   }
 }

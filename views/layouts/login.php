@@ -58,7 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="clearfix"></div>
                     <div class="separator">
                         <p class="change_link">Don't Have an Account ?
-                          <a href="#signup" class="to_register"> Create Account </a>
+                          <!-- <a href="#signup" class="to_register"> Create Account </a> -->
+
+                          <?= Html::a('Create Account', ['site/signup']) ?>
                         </p>
                       </div>
                     </div>
