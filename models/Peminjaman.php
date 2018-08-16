@@ -51,26 +51,13 @@ class Peminjaman extends \yii\db\ActiveRecord
 
     public function getBuku()
     {
-        $model = Buku::findOne($this->id_buku);
-
-        if ($model != null){
-            return $model->nama;
-        } else {
-            return null;
-        }
-
+        return $this->hasOne(Buku::class, ['id' => 'id_buku']);
     }
+
 
     public function getAnggota()
     {
-        $model = Anggota::findOne($this->id_anggota);
-
-        if ($model != null){
-            return $model->nama;
-        } else {
-            return null;
-        }
-
+        return $this->hasOne(Anggota::class, ['id' => 'id_anggota']);
     }
 
     public static function getCount()

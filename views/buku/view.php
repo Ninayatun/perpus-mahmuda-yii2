@@ -45,21 +45,21 @@ $this->params['breadcrumbs'][] = $this->title;
                'label' => 'Penulis',
                'value' => function($data)
                 {
-                  return $data->getPenulis();
+                  return $data->penulis->nama;
                 }
            ],
             [
                'label' => 'Penerbit',
                'value' => function($data)
                 {
-                  return $data->getPenerbit();
+                  return $data->penerbit->nama;
                 }
            ],
             [
                'label' => 'Kategori',
                'value' => function($data)
                 {
-                  return $data->getKategori();
+                  return $data->kategori->nama;
                 }
            ],
             'sinopsis:ntext',

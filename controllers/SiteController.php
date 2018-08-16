@@ -134,13 +134,4 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionExportPdf()
-   {
-         $this->layout='main1';
-         $model = Buku::find()->All();
-         $mpdf=new mPDF();
-         $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
-         $mpdf->Output('DataBuku.pdf', 'D');
-         exit;
-   }
 }
