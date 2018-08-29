@@ -20,10 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Tambah Buku', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Buku', ['create'], ['class' => 'btn btn-warning']) ?>
 
+        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['buku/jadwal-pl'], ['class' => 'btn btn-primary btn-flat']); ?>
 
-        <?= Html::a('Export Word', ['buku/jadwal-pl'], ['class' => 'btn btn-info btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['buku/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['buku/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
 
 
@@ -62,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Penerbit::getList(),
                 'value' => function($data)
                 {
-                  return $data->getPenerbit();
+                  return $data->penerbit->nama;
                 }
             ],
             [
@@ -70,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Kategori::getList(),
                 'value' => function($data)
                 {
-                  return $data->getKategori();
+                  return $data->kategori->nama;
                 }
             ],
             //'sinopsis:ntext',

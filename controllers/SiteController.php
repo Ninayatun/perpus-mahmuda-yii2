@@ -9,10 +9,13 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Buku;
+use Mpdf\Mpdf;
+
 
 class SiteController extends Controller
 {
-    public $layout = 'main';
+    // public $layout = 'main';
     /**
      * {@inheritdoc}
      */
@@ -62,7 +65,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // $this->layout = 'tes';
+        $this->layout = 'main';
 
         return $this->render('index');
     }
@@ -74,6 +77,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'main';
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -128,4 +133,5 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
 }

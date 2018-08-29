@@ -5,15 +5,12 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "petugas".
+ * This is the model class for table "user_role".
  *
  * @property int $id
  * @property string $nama
- * @property string $alamat
- * @property string $telepon
- * @property string $email
  */
-class Petugas extends \yii\db\ActiveRecord
+class UserRole extends \yii\db\ActiveRecord
 {
     public static function getList()
     {
@@ -24,7 +21,7 @@ class Petugas extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'petugas';
+        return 'user_role';
     }
 
     /**
@@ -34,8 +31,7 @@ class Petugas extends \yii\db\ActiveRecord
     {
         return [
             [['nama'], 'required'],
-            [['nama', 'alamat'], 'string', 'max' => 255],
-            [['telepon', 'email'], 'string', 'max' => 50],
+            [['nama'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,14 +43,6 @@ class Petugas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama' => 'Nama',
-            'alamat' => 'Alamat',
-            'telepon' => 'Telepon',
-            'email' => 'Email',
         ];
-    }
-
-    public static function getCount()
-    {
-        return static::find()->count();
     }
 }

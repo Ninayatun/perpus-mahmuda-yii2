@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Buku;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PeminjamanSearch */
@@ -34,14 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id_buku',
                 'value' => function($data)
                 {
-                  return $data->getBuku();
+                  return $data->buku->nama;
                 }
             ],
             [
                 'attribute' => 'id_anggota',
                 'value' => function($data)
                 {
-                  return $data->getAnggota();
+                  return $data->anggota->nama;
                 }
             ],
             'tanggal_pinjam',

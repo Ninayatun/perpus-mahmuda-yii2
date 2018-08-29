@@ -12,6 +12,10 @@ use yii\web\UploadedFile;
 use PhpOffice\PhpWord\IOfactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Shared\Converter;
+use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -307,9 +311,12 @@ class BukuController extends Controller
          
         $table->addRow(null);
         $table->addCell(500)->addText('NO', $headerStyle, $paragraphCenter);
-        $table->addCell(5000)->addText('KEGIATAN', $headerStyle, $paragraphCenter);
-        $table->addCell(5000)->addText('TGL', $headerStyle, $paragraphCenter);
-        $table->addCell(2000)->addText('NOMOR', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('JUDUL BUKU', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('TAHUN TERBIT', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('PENULIS', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('PENERBIT', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('KATEGORI', $headerStyle, $paragraphCenter);
+        $table->addCell(5000)->addText('SAMPUL', $headerStyle, $paragraphCenter);
 
         $semuaBuku = Buku::find()->all();
         $nomor = 1;
@@ -318,7 +325,10 @@ class BukuController extends Controller
             $table->addCell(500)->addText($nomor++, null, $paragraphCenter);
             $table->addCell(5000)->addText($buku->nama, null);
             $table->addCell(5000)->addText($buku->tahun_terbit, null, $paragraphCenter);
-            $table->addCell(2000)->addText($buku->getKategori(), null, $paragraphCenter);
+            $table->addCell(5000)->addText($buku->penulis->nama, null, $paragraphCenter);
+            $table->addCell(5000)->addText($buku->penerbit->nama, null, $paragraphCenter);
+            $table->addCell(5000)->addText($buku->kategori->nama, null, $paragraphCenter);
+            $table->addCell(5000)->addText(Yii::$app->request->baseUrl.'/upload/sampul/'.$buku['sampul'], null, $paragraphCenter);
         }
         
 
@@ -328,5 +338,51 @@ class BukuController extends Controller
         $xmlWriter = IOFactory::createWriter($phpWord, 'Word2007');
         $xmlWriter->save($lokasi);
         return $this->redirect($lokasi);
-}
+    }
+
+    public function actionExportPdf()
+   {
+         $this->layout='main1';
+         $model = Buku::find()->All();
+         $mpdf=new mPDF();
+         $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
+         $mpdf->Output('DataBuku.pdf', 'D');
+         exit;
+   }
+
+   public function actionExportExcel() {
+     
+    $spreadsheet = new PhpSpreadsheet\Spreadsheet();
+    $worksheet = $spreadsheet->getActiveSheet();
+     
+    //Menggunakan Model
+
+    $database = Buku::find()
+    ->select('nama, tahun_terbit')
+    ->all();
+
+    $worksheet->setCellValue('A1', 'Judul Buku');
+    $worksheet->setCellValue('B1', 'Tahun Terbit');
+     
+    //JIka menggunakan DAO , gunakan QueryAll()
+     
+    /*
+     
+    $sql = "select kode_jafung,jenis_jafung from ref_jafung"
+     
+    $database = Yii::$app->db->createCommand($sql)->queryAll();
+     
+    */
+     
+    $database = \yii\helpers\ArrayHelper::toArray($database);
+    $worksheet->fromArray($database, null, 'A2');
+     
+    $writer = new Xlsx($spreadsheet);
+     
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="download.xlsx"');
+    header('Cache-Control: max-age=0');
+    $writer->save('php://output');
+     
+    }
 }

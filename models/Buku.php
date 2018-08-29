@@ -78,26 +78,12 @@ class Buku extends \yii\db\ActiveRecord
 
     public function getPenerbit()
     {
-        $model = Penerbit::findOne($this->id_penerbit);
-
-        if ($model != null){
-            return $model->nama;
-        } else {
-            return null;
-        }
-
+        return $this->hasOne(Penerbit::class, ['id' => 'id_penerbit']);
     }
 
     public function getKategori()
     {
-        $model = Kategori::findOne($this->id_kategori);
-
-        if ($model != null){
-            return $model->nama;
-        } else {
-            return null;
-        }
-
+        return $this->hasOne(Kategori::class, ['id' => 'id_kategori']);
     }
 
 
