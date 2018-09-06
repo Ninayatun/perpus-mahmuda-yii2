@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Tambah Penulis', ['create'], ['class' => 'btn btn-success']) ?>
 
         <?= Html::a('Export Word', ['penulis/daftar-penulis'], ['class' => 'btn btn-info btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['penulis/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['penulis/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
 
     <?= GridView::widget([

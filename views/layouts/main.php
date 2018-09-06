@@ -65,17 +65,6 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                             [
                                 "items" => [
                                     ["label" => "Home", "url" => ["site/index"], "icon" => "home"],
-                                    ["label" => "Anggota", "url" => ["anggota/index"], "icon" => "users"],
-                                    ["label" => "Petugas", "url" => ["petugas/index"], "icon" => "user "],
-                                    [
-                                        "label" => "User",
-                                        "icon" => "th",
-                                        "url" => "#",
-                                        "items" => [
-                                            ["label" => "User", "url" => ["user/index"], "icon" => "users"],
-                                            ["label" => "User Role", "url" => ["user-role/index"], "icon" => "users"],
-                                        ],
-                                    ],
                                     [
                                         "label" => "Master Buku",
                                         "icon" => "th",
@@ -87,7 +76,18 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                             ["label" => "Penerbit", "url" => ["penerbit/index"], "icon" => "building"],
                                         ],
                                     ],
+                                    ["label" => "Anggota", "url" => ["anggota/index"], "icon" => "users"],
+                                    ["label" => "Petugas", "url" => ["petugas/index"], "icon" => "user "],
                                     ["label" => "Peminjaman", "url" => ["peminjaman/index"], "icon" => "list-alt"],
+                                    [
+                                        "label" => "User",
+                                        "icon" => "th",
+                                        "url" => "#",
+                                        "items" => [
+                                            ["label" => "User", "url" => ["user/index"], "icon" => "users"],
+                                            ["label" => "User Role", "url" => ["user-role/index"], "icon" => "users"],
+                                        ],
+                                    ],
                                     // [
                                     //     "label" => "Badges",
                                     //     "url" => "#",

@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use PhpOffice\PhpWord\IOfactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Shared\Converter;
+use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * PenulisController implements the CRUD actions for Penulis model.
@@ -196,4 +199,53 @@ class PenulisController extends Controller
         $xmlWriter->save($lokasi);
         return $this->redirect($lokasi);
 }
+
+    public function actionExportPdf()
+   {
+         $this->layout='mainPdf';
+         $model = Penulis::find()->All();
+         $mpdf=new mPDF();
+         $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
+         $mpdf->Output('DataPenulis.pdf', 'D');
+         exit;
+   }
+
+   public function actionExportExcel() {
+     
+    $spreadsheet = new PhpSpreadsheet\Spreadsheet();
+    $worksheet = $spreadsheet->getActiveSheet();
+     
+    //Menggunakan Model
+
+    $database = Penulis::find()
+    ->select('nama, alamat, email, telepon')
+    ->all();
+
+    $worksheet->setCellValue('A1', 'Nama');
+    $worksheet->setCellValue('B1', 'Alamat');
+    $worksheet->setCellValue('C1', 'Email');
+    $worksheet->setCellValue('D1', 'Telepon');
+     
+    //JIka menggunakan DAO , gunakan QueryAll()
+     
+    /*
+     
+    $sql = "select kode_jafung,jenis_jafung from ref_jafung"
+     
+    $database = Yii::$app->db->createCommand($sql)->queryAll();
+     
+    */
+     
+    $database = \yii\helpers\ArrayHelper::toArray($database);
+    $worksheet->fromArray($database, null, 'A2');
+     
+    $writer = new Xlsx($spreadsheet);
+     
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="penulis.xlsx"');
+    header('Cache-Control: max-age=0');
+    $writer->save('php://output');
+     
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "peminjaman".
@@ -63,5 +64,19 @@ class Peminjaman extends \yii\db\ActiveRecord
     public static function getCount()
     {
         return static::find()->count();
+    }
+
+    public function getManyBuku()
+    {
+        return $this->hasMany(Buku::class, ['id_buku' => 'id']);
+    }
+
+    public static function getGrafikList()
+    {
+        $data = [];
+        foreach (static::find()->all() as $peminjaman) {
+            $data[] = [StringHelper::truncate($peminjaman->id_buku, 20), (int) $peminjaman->getManyBuku()->count()];
+        }
+        return $data;
     }
 }

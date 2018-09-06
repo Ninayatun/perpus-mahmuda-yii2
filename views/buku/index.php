@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['buku/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
 
         <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['buku/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['buku/surat-cerai2'], ['class' => 'btn btn-primary btn-flat']); ?>
     </p>
 
 
@@ -42,7 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'text-align:center']
             ],
             'nama',
-            // 'tahun_terbit',
+            [
+                'attribute' => 'tahun_terbit',
+                'headerOptions' => ['style' => 'text-align:center'],
+                'contentOptions' => ['style' => 'text-align:center'],
+            ],
            //  [
            //     'class' => 'yii\grid\DataColumn',
            //     'header' => 'Nama Penulis',
@@ -57,24 +63,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Penulis::getList(),
                 'value' => function($data)
                 {
-                  return $data->penulis->nama;
-                }
+                  return @$data->penulis->nama;
+                },
+                'headerOptions' => ['style' => 'text-align:center'],
+                'contentOptions' => ['style' => 'text-align:center']
+
             ],
             [
                 'attribute' => 'id_penerbit',
                 'filter' => Penerbit::getList(),
                 'value' => function($data)
                 {
-                  return $data->penerbit->nama;
-                }
+                  return @$data->penerbit->nama;
+                },
+                'headerOptions' => ['style' => 'text-align:center'],
+                'contentOptions' => ['style' => 'text-align:center']
             ],
             [
                 'attribute' => 'id_kategori',
                 'filter' => Kategori::getList(),
                 'value' => function($data)
                 {
-                  return $data->kategori->nama;
-                }
+                  return @$data->kategori->nama;
+                },
+                'headerOptions' => ['style' => 'text-align:center'],
+                'contentOptions' => ['style' => 'text-align:center']
             ],
             //'sinopsis:ntext',
             [

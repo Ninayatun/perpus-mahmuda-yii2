@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\models\Buku;
 use app\models\Anggota;
 use app\models\Petugas;
+use app\models\Penulis;
 use app\models\Peminjaman;
 use app\models\Kategori;
 use miloschuman\highcharts\Highcharts;
@@ -70,6 +71,35 @@ $this->title = 'Perpustakaan';
                                 'type' => 'pie',
                                 'name' => 'Kategori',
                                 'data' => Kategori::getGrafikList(),
+                            ],
+                        ],
+                    ],
+                ]);?>
+            </div>
+
+    </div>
+
+      <div class="col-sm-6">
+        
+            <div class="box-header with-border">
+                <h3 class="box-title">Buku Berdasarkan Penulis</h3>
+            </div>
+            <div class="box-body">
+                <?=Highcharts::widget([
+                    'options' => [
+                        'credits' => false,
+                        'title' => ['text' => 'PENULIS BUKU'],
+                        'exporting' => ['enabled' => true],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'pie',
+                                'name' => 'Penulis',
+                                'data' => Penulis::getGrafikList(),
                             ],
                         ],
                     ],

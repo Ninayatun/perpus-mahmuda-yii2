@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "penulis".
@@ -68,6 +69,20 @@ class Penulis extends \yii\db\ActiveRecord
         return Buku::find()
             ->andWhere(['id_penulis' => $this->id])
             ->count();
+    }
+
+    public function getManyBuku()
+    {
+        return $this->hasMany(Buku::class, ['id_penulis' => 'id']);
+    }
+
+    public static function getGrafikList()
+    {
+        $data = [];
+        foreach (static::find()->all() as $penulis) {
+            $data[] = [StringHelper::truncate($penulis->nama, 20), (int) $penulis->getManyBuku()->count()];
+        }
+        return $data;
     }
     
 }
