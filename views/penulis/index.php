@@ -10,8 +10,8 @@ use yii\grid\GridView;
 $this->title = 'Penulis';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="penulis-index">
-
+<div class="penulis-index box box-primary">
+    <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['penulis/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
-
+    </div>
+    <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -43,4 +44,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

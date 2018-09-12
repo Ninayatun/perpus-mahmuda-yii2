@@ -28,7 +28,9 @@
         "2amigos/yii2-tinymce-widget": "^1.1",
         "phpoffice/phpspreadsheet": "^1.4",
         "phpoffice/phpexcel": "^1.8",
-        "kartik-v/yii2-mpdf": "^1.0"
+        "kartik-v/yii2-mpdf": "^1.0",
+        "almasaeed2010/adminlte": "^2.4",
+        "dmstr/yii2-adminlte-asset": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

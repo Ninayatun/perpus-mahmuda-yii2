@@ -8,46 +8,78 @@ use app\models\Penulis;
 use app\models\Peminjaman;
 use app\models\Kategori;
 use miloschuman\highcharts\Highcharts;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Perpustakaan';
 ?>
 <div class="site-index">
+<div class="box-body">
+<div class="row">
 
-	<div class="row top_tiles">
-              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-users"></i></div>
-                  <div class="count"><?= Yii::$app->formatter->asInteger(Anggota::getCount()); ?></div>
-                  <h3>Anggota</h3>
-                  <p><?= Html::a('More Info', ['anggota/index']) ?> <i class="fa fa-arrow-right"></i></p>
-                </div>
-              </div>
-              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-user"></i></div>
-                  <div class="count"><?= Yii::$app->formatter->asInteger(Petugas::getCount()); ?></div>
-                  <h3>Petugas</h3>
-                  <p><?= Html::a('More Info', ['petugas/index']) ?> <i class="fa fa-arrow-right"></i></p>
-                </div>
-              </div>
-              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-book"></i></div>
-                  <div class="count"><?= Yii::$app->formatter->asInteger(Buku::getCount()); ?></div>
-                  <h3>Buku</h3>
-                  <p><?= Html::a('More Info', ['buku/index']) ?> <i class="fa fa-arrow-right"></i></p>
-                </div>
-              </div>
-              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-check-square-o"></i></div>
-                  <div class="count"><?= Yii::$app->formatter->asInteger(Peminjaman::getCount()); ?></div>
-                  <h3>Peminjaman</h3>
-                  <p><?= Html::a('More Info', ['peminjaman/index']) ?> <i class="fa fa-arrow-right"></i></p>
-                </div>
-              </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <p>Jumlah Anggota</p>
+
+                <h3><?= Yii::$app->formatter->asInteger(Anggota::getCount()); ?></h3>
             </div>
+            <div class="icon">
+                <i class="fa fa-building"></i>
+            </div>
+            <a href="<?=Url::to(['anggota/index']);?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-purple">
+            <div class="inner">
+                <p>Jumlah Petugas</p>
+
+                <h3><?= Yii::$app->formatter->asInteger(Petugas::getCount()); ?></h3>
+            </div>
+            <div class="icon">
+                <i class="fa fa-users"></i>
+            </div>
+            <a href="<?=Url::to(['petugas/index']);?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <p>Jumlah Buku</p>
+
+                <h3><?= Yii::$app->formatter->asInteger(Buku::getCount()); ?></h3>
+            </div>
+            <div class="icon">
+                <i class="fa fa-times"></i>
+            </div>
+            <a href="<?=Url::to(['buku/index']);?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <p>Jumlah Peminjaman</p>
+
+                <h3><?= Yii::$app->formatter->asInteger(Peminjaman::getCount()); ?></h3>
+            </div>
+            <div class="icon">
+                <i class="fa fa-warning"></i>
+            </div>
+            <a href="<?=Url::to(['peminjaman/index']);?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
 
 <div class="row">
       <div class="col-sm-6">
@@ -108,5 +140,5 @@ $this->title = 'Perpustakaan';
 
     </div>
 </div>
-    
+</div>
 </div>

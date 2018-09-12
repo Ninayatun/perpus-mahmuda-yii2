@@ -53,10 +53,6 @@ use dosamigos\tinymce\TinyMce;
             ],
         ]); ?>   
 
-    
-
-    <!-- <?= $form->field($model, 'sinopsis')->textarea(['rows' => 6]) ?> -->
-
     <?= $form->field($model, 'sinopsis')->widget(TinyMce::className(), [
         'options' => ['rows' => 6],
         'language' => 'es',

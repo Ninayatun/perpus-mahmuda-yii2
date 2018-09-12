@@ -10,15 +10,18 @@ use yii\grid\GridView;
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
-
+<div class="user-index box box-primary">
+    <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
+        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['user/pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+    </p>
+    </div>
+    <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -51,4 +54,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

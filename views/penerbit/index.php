@@ -10,8 +10,8 @@ use yii\grid\GridView;
 $this->title = 'Penerbit';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="penerbit-index">
-
+<div class="penerbit-index box box-primary">
+    <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a('Export Word', ['penerbit/daftar-penerbit'], ['class' => 'btn btn-info btn-flat']); ?>
     </p>
-
+    </div>
+    <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -39,4 +40,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

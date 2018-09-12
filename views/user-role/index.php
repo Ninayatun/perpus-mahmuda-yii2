@@ -10,15 +10,17 @@ use yii\grid\GridView;
 $this->title = 'User Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-role-index">
+<div class="user-role-index box box-primary">
 
+    <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create User Role', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+</div>
+<div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -35,4 +37,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

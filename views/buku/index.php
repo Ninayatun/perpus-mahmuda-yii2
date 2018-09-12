@@ -14,8 +14,9 @@ use app\models\Penerbit;
 $this->title = 'Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="buku-index">
+<div class="buku-index box box-primary">
 
+    <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -28,11 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['buku/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['buku/surat-cerai2'], ['class' => 'btn btn-primary btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"> SURAT CERAI WOY </i>', ['buku/surat-cerai2'], ['class' => 'btn btn-primary btn-flat']); ?>
     </p>
+    </div>
 
 
-
+    <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -117,4 +119,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+</div>
 </div>

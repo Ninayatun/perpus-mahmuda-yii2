@@ -1,252 +1,65 @@
 <?php
-
-/**
- * @var string $content
- * @var \yii\web\View $this
- */
-
 use yii\helpers\Html;
 
-$bundle = yiister\gentelella\assets\Asset::register($this);
+/* @var $this \yii\web\View */
+/* @var $content string */
 
-?>
-<?php $this->beginPage(); ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="<?= Yii::$app->charset ?>" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body class="nav-<?= !empty($_COOKIE['menuIsCollapsed']) && $_COOKIE['menuIsCollapsed'] == 'true' ? 'sm' : 'md' ?>" >
-<?php $this->beginBody(); ?>
-<div class="container body">
 
-    <div class="main_container">
+if (Yii::$app->controller->action->id === 'login') { 
+/**
+ * Do not use this code in your template. Remove it. 
+ * Instead, use the code  $this->layout = '//main-login'; in your controller.
+ */
+    echo $this->render(
+        'main-login',
+        ['content' => $content]
+    );
+} else {
 
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
+    if (class_exists('backend\assets\AppAsset')) {
+        backend\assets\AppAsset::register($this);
+    } else {
+        app\assets\AppAsset::register($this);
+    }
 
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-book"></i> <span>Perpustakaan</span></a>
-                </div>
-                <div class="clearfix"></div>
+    dmstr\web\AdminLteAsset::register($this);
 
-                <!-- menu prile quick info -->
-                <div class="profile">
-                    <div class="profile_pic">
-                        <img src="../web/img/photo.png" height="60px" alt="..." class="img-circle profile_img">
-                    </div>
-                    <div class="profile_info">
-                        <span>Welcome,</span>
-                        <h2>Mahmuda</h2>
-                    </div>
-                </div>
-                <!-- /menu prile quick info -->
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+    ?>
+    <?php $this->beginPage() ?>
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+    <?php $this->beginBody() ?>
+    <div class="wrapper">
 
-                <br />
+        <?= $this->render(
+            'header.php',
+            ['directoryAsset' => $directoryAsset]
+        ) ?>
 
-                <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <?= $this->render(
+            'left.php',
+            ['directoryAsset' => $directoryAsset]
+        )
+        ?>
 
-                    <div class="menu_section">
-                        <div>&nbsp;</div>
-                        <?=
-                        \yiister\gentelella\widgets\Menu::widget(
-                            [
-                                "items" => [
-                                    ["label" => "Home", "url" => ["site/index"], "icon" => "home"],
-                                    [
-                                        "label" => "Master Buku",
-                                        "icon" => "th",
-                                        "url" => "#",
-                                        "items" => [
-                                            ["label" => "Buku", "url" => ["buku/index"], "icon" => "book"],
-                                            ["label" => "Kategori", "url" => ["kategori/index"], "icon" => "list"],
-                                            ["label" => "Penulis", "url" => ["penulis/index"], "icon" => "user"],
-                                            ["label" => "Penerbit", "url" => ["penerbit/index"], "icon" => "building"],
-                                        ],
-                                    ],
-                                    ["label" => "Anggota", "url" => ["anggota/index"], "icon" => "users"],
-                                    ["label" => "Petugas", "url" => ["petugas/index"], "icon" => "user "],
-                                    ["label" => "Peminjaman", "url" => ["peminjaman/index"], "icon" => "list-alt"],
-                                    [
-                                        "label" => "User",
-                                        "icon" => "th",
-                                        "url" => "#",
-                                        "items" => [
-                                            ["label" => "User", "url" => ["user/index"], "icon" => "users"],
-                                            ["label" => "User Role", "url" => ["user-role/index"], "icon" => "users"],
-                                        ],
-                                    ],
-                                    // [
-                                    //     "label" => "Badges",
-                                    //     "url" => "#",
-                                    //     "icon" => "table",
-                                    //     "items" => [
-                                    //         [
-                                    //             "label" => "Default",
-                                    //             "url" => "#",
-                                    //             "badge" => "123",
-                                    //         ],
-                                    //         [
-                                    //             "label" => "Success",
-                                    //             "url" => "#",
-                                    //             "badge" => "new",
-                                    //             "badgeOptions" => ["class" => "label-success"],
-                                    //         ],
-                                    //         [
-                                    //             "label" => "Danger",
-                                    //             "url" => "#",
-                                    //             "badge" => "!",
-                                    //             "badgeOptions" => ["class" => "label-danger"],
-                                    //         ],
-                                    //     ],
-                                    // ],
-                                    // [
-                                    //     "label" => "Multilevel",
-                                    //     "url" => "#",
-                                    //     "icon" => "table",
-                                    //     "items" => [
-                                    //         [
-                                    //             "label" => "Second level 1",
-                                    //             "url" => "#",
-                                    //         ],
-                                    //         [
-                                    //             "label" => "Second level 2",
-                                    //             "url" => "#",
-                                    //             "items" => [
-                                    //                 [
-                                    //                     "label" => "Third level 1",
-                                    //                     "url" => "#",
-                                    //                 ],
-                                    //                 [
-                                    //                     "label" => "Third level 2",
-                                    //                     "url" => "#",
-                                    //                 ],
-                                    //             ],
-                                    //         ],
-                                    //     ],
-                                    // ],
-                                ],
-                            ]
-                        )
-                        ?>
-                    </div>
+        <?= $this->render(
+            'content.php',
+            ['content' => $content, 'directoryAsset' => $directoryAsset]
+        ) ?>
 
-                </div>
-                <!-- /sidebar menu -->
-
-                <!-- /menu footer buttons -->
-                <div class="sidebar-footer hidden-small">
-                    <a data-toggle="tooltip" data-placement="top" title="Settings">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Lock">
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                    </a>
-                </div>
-                <!-- /menu footer buttons -->
-            </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-
-            <div class="nav_menu">
-                <nav class="" role="navigation">
-                    <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                    </div>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="../web/img/photo.png" alt="">Mahmuda
-                                <span class=" fa fa-angle-down"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;">  Profile</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">Help</a>
-                                </li>
-                                <li><?=Html::a('<i class="fa fa-sign-out"></i> Logout', ['site/logout']);?></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-        </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-            <?php if (isset($this->params['h1'])): ?>
-                <div class="page-title">
-                    <div class="title_left">
-                        <h1><?= $this->params['h1'] ?></h1>
-                    </div>
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Go!</button>
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-            <div class="clearfix"></div>
-
-            <?= $content ?>
-        </div>
-        <!-- /page content -->
-        <!-- footer content -->
-        <footer>
-            <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com" rel="nofollow" target="_blank">Colorlib</a><br />
-                Extension for Yii framework 2 by <a href="http://yiister.ru" rel="nofollow" target="_blank">Yiister</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
     </div>
 
-</div>
-
-<div id="custom_notifications" class="custom-notifications dsp_none">
-    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-    </ul>
-    <div class="clearfix"></div>
-    <div id="notif-group" class="tabbed_notifications"></div>
-</div>
-<!-- /footer content -->
-<?php $this->endBody(); ?>
-</body>
-</html>
-<?php $this->endPage(); ?>
+    <?php $this->endBody() ?>
+    </body>
+    </html>
+    <?php $this->endPage() ?>
+<?php } ?>
