@@ -15,6 +15,8 @@ use PhpOffice\PhpWord\Shared\Converter;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use yii\filters\AccessControl;
+use app\models\User;
 
 
 /**
@@ -29,10 +31,21 @@ class BukuController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'update', 'create'],
+                        'allow' => User::isAdmin() || User::isAnggota(),
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];

@@ -112,4 +112,34 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
 
     }
+
+    public static function isAdmin()
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        $model = User::findOne(['username' => Yii::$app->user->identity->username]);
+        if ($model == null){
+            return false;
+        } elseif ($model->id_user_role == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isAnggota()
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        $model = User::findOne(['username' => Yii::$app->user->identity->username]);
+        if ($model == null){
+            return false;
+        } elseif ($model->id_user_role == 2) {
+            return true;
+        }
+        return false;
+    }
 }

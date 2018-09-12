@@ -1,3 +1,9 @@
+<?php
+
+use app\models\User;
+
+?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -26,7 +32,9 @@
         </form>
         <!-- /.search form -->
 
-        <?= dmstr\widgets\Menu::widget(
+        <?php  if (User::isAdmin()) { ?>
+
+            <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
@@ -36,39 +44,31 @@
                     ['label' => 'Penulis', 'icon' => 'user', 'url' => ['penulis/index'],],
                     ['label' => 'Penerbit', 'icon' => 'user', 'url' => ['penerbit/index'],],
                     ['label' => 'Kategori', 'icon' => 'list', 'url' => ['kategori/index'],],
+                    ['label' => 'Peminjaman', 'options' => ['class' => 'header']],
+                    ['label' => 'Peminjaman', 'icon' => 'users', 'url' => ['peminjaman/index'],],
                     ['label' => 'User', 'options' => ['class' => 'header']],
                     ['label' => 'User', 'icon' => 'users', 'url' => ['user/index'],],
                     ['label' => 'User Role', 'icon' => 'list-ol', 'url' => ['user-role/index'],],
                     ['label' => 'Login', 'options' => ['class' => 'header']],
                     ['label' => 'Logout', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    // [
-                    //     'label' => 'Master Buku',
-                    //     'icon' => 'share',
-                    //     'url' => '#',
-                    //     'items' => [
-                            
-                    //         [
-                    //             'label' => 'Level One',
-                    //             'icon' => 'circle-o',
-                    //             'url' => '#',
-                    //             'items' => [
-                    //                 ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                    //                 [
-                    //                     'label' => 'Level Two',
-                    //                     'icon' => 'circle-o',
-                    //                     'url' => '#',
-                    //                     'items' => [
-                    //                         ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                    //                         ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                    //                     ],
-                    //                 ],
-                    //             ],
-                    //         ],
-                    //     ],
-                    // ],
                 ],
             ]
         ) ?>
+
+        <?php } elseif (User::isAnggota()) { ?>
+            <?= dmstr\widgets\Menu::widget( 
+            [
+                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                'items' => [
+                    ['label' => 'Home', 'icon' => 'dashboard','url' => ['site/index'],],
+                    ['label' => 'Peminjaman', 'options' => ['class' => 'header']],
+                    ['label' => 'Peminjaman', 'icon' => 'users', 'url' => ['peminjaman/index'],],
+                    ['label' => 'Login', 'options' => ['class' => 'header']],
+                    ['label' => 'Logout', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ],
+            ]
+        ) ?>
+       <?php } ?>
 
     </section>
 

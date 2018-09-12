@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Buku;
+use app\models\User;
 use Mpdf\Mpdf;
 
 
@@ -33,12 +34,12 @@ class SiteController extends Controller
                     ],
                 ],
             ],
-            // 'verbs' => [
-            //     'class' => VerbFilter::className(),
-            //     'actions' => [
-            //         'logout' => ['post'],
-            //     ],
-            // ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
         ];
     }
 
@@ -67,7 +68,11 @@ class SiteController extends Controller
     {
         $this->layout = 'main';
 
-        return $this->render('index');
+        if (User::isAdmin() || User::isAnggota()) {
+            return $this->render('index');
+        } else {
+            return $this->redirect(['site/login']);
+        }
     }
 
     /**
@@ -79,9 +84,9 @@ class SiteController extends Controller
     {
         $this->layout = 'main';
 
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        // if (!Yii::$app->user->isGuest) {
+        //     return $this->goHome();
+        // }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
