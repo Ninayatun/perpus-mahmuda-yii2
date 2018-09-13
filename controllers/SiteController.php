@@ -68,7 +68,7 @@ class SiteController extends Controller
     {
         $this->layout = 'main';
 
-        if (User::isAdmin() || User::isAnggota()) {
+        if (User::isAdmin() || User::isAnggota() || User::isPetugas()) {
             return $this->render('index');
         } else {
             return $this->redirect(['site/login']);

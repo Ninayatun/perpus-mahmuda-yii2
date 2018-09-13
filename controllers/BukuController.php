@@ -37,7 +37,7 @@ class BukuController extends Controller
                 'rules' => [
                     [
                         'actions' => ['index', 'update', 'create'],
-                        'allow' => User::isAdmin() || User::isAnggota(),
+                        'allow' => User::isAdmin() || User::isPetugas(),
                         'roles' => ['@'],
                     ],
                 ],

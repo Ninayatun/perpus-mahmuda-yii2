@@ -68,6 +68,21 @@ use app\models\User;
                 ],
             ]
         ) ?>
+       <?php } elseif (User::isPetugas()) { ?>
+           <?= dmstr\widgets\Menu::widget( 
+            [
+                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                'items' => [
+                    ['label' => 'Home', 'icon' => 'dashboard','url' => ['site/index'],],
+                    ['label' => 'Buku', 'options' => ['class' => 'header']],
+                    ['label' => 'Buku', 'icon' => 'book','url' => ['buku/index'],],
+                    ['label' => 'Peminjaman', 'options' => ['class' => 'header']],
+                    ['label' => 'Peminjaman', 'icon' => 'users', 'url' => ['peminjaman/index'],],
+                    ['label' => 'Login', 'options' => ['class' => 'header']],
+                    ['label' => 'Logout', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ],
+            ]
+        ) ?>
        <?php } ?>
 
     </section>
