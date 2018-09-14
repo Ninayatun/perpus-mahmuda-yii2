@@ -201,14 +201,14 @@ class PenulisController extends Controller
 }
 
     public function actionExportPdf()
-   {
+    {
          $this->layout='mainPdf';
          $model = Penulis::find()->All();
          $mpdf=new mPDF();
          $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
          $mpdf->Output('DataPenulis.pdf', 'D');
          exit;
-   }
+    }
 
    public function actionExportExcel() {
      

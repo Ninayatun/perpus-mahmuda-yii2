@@ -16,9 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Tambah Penulis', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Penulis', ['create'], ['class' => 'btn btn btn-warning']) ?>
 
-        <?= Html::a('Export Word', ['penulis/daftar-penulis'], ['class' => 'btn btn-info btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['penulis/daftar-penulis'], ['class' => 'btn btn-info btn-flat']); ?>
 
         <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['penulis/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
 

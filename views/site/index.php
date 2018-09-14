@@ -87,6 +87,11 @@ $this->title = 'Perpustakaan';
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Buku Berdasarkan Kategori</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
             </div>
             <div class="box-body">
                 <?=Highcharts::widget([
@@ -116,6 +121,11 @@ $this->title = 'Perpustakaan';
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Buku Berdasarkan Penulis</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
             </div>
             <div class="box-body">
                 <?=Highcharts::widget([
@@ -139,6 +149,43 @@ $this->title = 'Perpustakaan';
                 ]);?>
             </div>
         </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Area Chart</h3>
+
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                  <div class="chart">
+                        <?=Highcharts::widget([
+                            'options' => [
+                                'credits' => false,
+                                'title' => ['text' => 'PENULIS BUKU'],
+                                'exporting' => ['enabled' => true],
+                                'plotOptions' => [
+                                    'area' => [
+                                        'cursor' => 'pointer',
+                                    ],
+                                ],
+                                'series' => [
+                                    [
+                                        'type' => 'area',
+                                        'name' => 'Penulis',
+                                        'data' => Penulis::getGrafikList(),
+                                    ],
+                                ],
+                            ],
+                        ]);?>
+                  </div>
+                </div>
+                <!-- /.box-body -->
+              </div>
     </div>
 </div>
 </div>

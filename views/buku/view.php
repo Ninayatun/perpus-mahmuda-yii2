@@ -13,8 +13,8 @@ $this->title = "Detail Buku : " . $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="buku-view">
-
+<div class="buku-view box box-primary">
+  <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+  </div>
+  <div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -77,5 +78,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'berkas',
         ],
     ]) ?>
-
+  </div>
 </div>

@@ -11,10 +11,16 @@ use app\models\User;
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="img/photo.png" style="height: 80px;" class="img-circle" alt="User Image"/>
+                <?php if (User::isAdmin()) { ?>
+                    <img src="img/admin.png" class="img-circle" alt="User Image"/>
+                <?php } elseif (User::isAnggota()) { ?>
+                    <img src="img/kiko.jpg" class="img-circle" alt="User Image"/>
+                <?php } ?>
+                
             </div>
             <div class="pull-left info">
-                <p>Nurinay Pierce</p>
+
+                <p>Pierce</p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>

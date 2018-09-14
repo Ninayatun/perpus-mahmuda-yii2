@@ -16,9 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Tambah Kategori', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Kategori', ['create'], ['class' => 'btn btn-warning']) ?>
 
-        <?= Html::a('Export Word', ['kategori/daftar-kategori'], ['class' => 'btn btn-info btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['kategori/daftar-kategori'], ['class' => 'btn btn-info btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['kategori/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+
+        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['kategori/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
     </div>
     <div class="box-body">

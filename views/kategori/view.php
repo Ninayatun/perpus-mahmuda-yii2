@@ -10,8 +10,8 @@ $this->title = "Detail Kategori : " . $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Kategori', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="kategori-view">
-
+<div class="kategori-view box box-primary">
+  <div class="box-header">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+</div>
+<div class="box-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -38,11 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
-
+</div>
 </div>
 
 <div>&nbsp;</div>
 
+<div class="box-body box box-primary">
 
 <h1>Daftar Buku</h1>
 
@@ -67,3 +69,4 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
     <?php $no++; endforeach ?>
 </table>
+</div>
