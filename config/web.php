@@ -12,6 +12,25 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@app/themes/adminlte'
+                ],
+            ],
+        ],
+         'mail' => [
+        'useFileTransport' => false,
+        'class' => 'yii\swiftmailer\Mailer',
+        'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+            'username' => 'mahmudanurinayatun@gmail.com',
+            'password' => 'Mahmuda220797',
+            'port' => '587', // Port 25 is a very common port too
+            'encryption' => 'tls', // It is often used, check your provider or mail server specs
+        ],
+     ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'ZlZ8_9anFjfqdzjXr76PbB-SvjbKY7os',

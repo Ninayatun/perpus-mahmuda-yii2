@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -18,21 +19,35 @@ use yii\helpers\Html;
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-
-                <!-- User Account: style can be found in dropdown.less -->
-
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../web/img/kiko.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Nurinay Pierce</span>
+                        <?php if (User::isAdmin()) { ?>
+                                <img src="../web/img/admin.png" class="user-image" alt="User Image"/>
+                            <?php } elseif (User::isAnggota()) { ?>
+                                <img src="../web/img/kiko.jpg" class="user-image" alt="User Image"/>
+                            <?php } ?>
+                        
+                            <?php if (User::isAdmin()) { ?>
+                                    <span class="hidden-xs">Admin</span>
+                                <?php } elseif (User::isAnggota()) { ?>
+                                    <span class="hidden-xs">Anggota</span>
+                                <?php } ?>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../web/img/kiko.jpg" class="img-circle" alt="User Image"/>
+                            <?php if (User::isAdmin()) { ?>
+                                <img src="img/admin.png" class="img-circle" alt="User Image"/>
+                            <?php } elseif (User::isAnggota()) { ?>
+                                <img src="img/kiko.jpg" class="img-circle" alt="User Image"/>
+                            <?php } ?>
                             <p>
-                                Nurinay Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <?php if (User::isAdmin()) { ?>
+                                    <p>Admin</p>
+                                <?php } elseif (User::isAnggota()) { ?>
+                                    <p>Anggota</p>
+                                <?php } ?>
+                                <small>Since July. 2018</small>
                             </p>
                         </li>
                         <!-- Menu Body -->

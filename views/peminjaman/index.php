@@ -18,6 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Tambah Peminjaman', ['create'], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('<i class="fa fa-send"> Send Email </i>', ['site/send-email'], ['class' => 'btn btn-primary btn-flat']); ?>
     </p>
 
     <?php 

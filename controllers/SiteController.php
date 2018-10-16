@@ -12,6 +12,8 @@ use app\models\ContactForm;
 use app\models\Buku;
 use app\models\User;
 use Mpdf\Mpdf;
+use app\models\RegisterForm;
+use app\models\Anggota;
 
 
 class SiteController extends Controller
@@ -58,6 +60,17 @@ class SiteController extends Controller
             ],
         ];
     }
+
+
+    public function actionSendEmail()
+   {
+       return Yii::$app->mail->compose()
+       ->setFrom('mahmudanurinayatun@gmail.com')
+       ->setTo('0896377@gmail.com')
+       ->setSubject('Coba')
+       ->setTextBody('<b>hallo guys</b>')
+       ->send();
+   }
 
     /**
      * Displays homepage.
@@ -138,5 +151,37 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionRegister()
+   {
+       //agar secara otomatis membuat sendiri
+       $this->layout='main-login';
+       //$model untuk layout register
+       $model = new RegisterForm();
+
+       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+           $anggota = new Anggota();
+           $anggota->nama = $model->nama;
+           $anggota->alamat = $model->alamat;
+           $anggota->telepon = $model->telepon;
+           $anggota->email = $model->email;
+           $anggota->save();
+
+           $user = new User();
+           $user->username = $model->username;
+           $user->password = $model->password;
+           $user->id_anggota = $anggota->id;
+           $user->id_petugas = 0;
+           $user->id_user_role = 2;
+           $user->status = 2;
+           $user->save();
+
+           return $this->redirect(['site/login']);
+       }
+
+       //untuk memunculkan form dari halaman register
+       return $this->render('register', ['model'=>$model]);
+   }
 
 }
