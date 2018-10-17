@@ -12,17 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="penerbit-index box box-primary">
     <div class="box-header">
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Tambah Penerbit', ['create'], ['class' => 'btn btn-warning']) ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['penerbit/daftar-penerbit'], ['class' => 'btn btn-info btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Word', ['penerbit/daftar-penerbit'], ['class' => 'btn btn-info btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['penerbit/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Pdf', ['penerbit/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['penerbit/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Excel', ['penerbit/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
     </div>
     <div class="box-body">

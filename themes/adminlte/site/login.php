@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
+
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -23,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="login-logo">
               <img src="../web/img/admin.png" style="height: 100px;">
               <p style="font-weight: bold; color: #F5C316">PERPUSTAKAAN</p>
-
+              <p class="txt-l" style="font-weight: bold">Politeknik Negeri Indramayu</p>
             </div>
 
 <div class="login-box">
@@ -43,10 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Password'])->label(false); ?>
 
+        <?= $form->field($model, 'verifyCode')->widget(Captcha::className()) ?>
+
         <div class="row">
-            <div class="col-xs-8">
+            <!-- <div class="col-xs-8">
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            </div>
+            </div> -->
             <!-- /.col -->
             <div class="col-xs-4">
                 <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
@@ -57,7 +61,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php ActiveForm::end(); ?>
 
-        <?= Html::a('Register', ['site/register']) ?>
+        <div class="row">
+            <div class="col-xs-4">
+                <?= Html::a('Register', ['site/register'], ['class' => 'btn btn-success']) ?>
+            </div>
+            <div class="col-xs-4">
+                <?= Html::a('Forget Password', ['site/forget'], ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
 
     </div>
     <!-- /.login-box-body -->

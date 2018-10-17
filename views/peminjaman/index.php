@@ -11,17 +11,16 @@ use yii\grid\GridView;
 $this->title = 'Peminjaman';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="peminjaman-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="peminjaman-index box box-primary">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <div class="box-header">
     <p>
         <?= Html::a('Tambah Peminjaman', ['create'], ['class' => 'btn btn-success']) ?>
 
         <?= Html::a('<i class="fa fa-send"> Send Email </i>', ['site/send-email'], ['class' => 'btn btn-primary btn-flat']); ?>
     </p>
-
+    </div>
+    <div class="box-body">
     <?php 
         //$tanggal = date('Y-m-d');
         //$haribaru = "Senin Selasa Rabu Kamis Jumat Sabtu Minggu";
@@ -78,4 +77,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    </div>
 </div>

@@ -14,6 +14,7 @@ use app\models\User;
 use Mpdf\Mpdf;
 use app\models\RegisterForm;
 use app\models\Anggota;
+use app\models\ForgetPasswordForm;
 
 
 class SiteController extends Controller
@@ -71,6 +72,51 @@ class SiteController extends Controller
        ->setTextBody('<b>hallo guys</b>')
        ->send();
    }
+
+   public function actionForget()
+  {
+      $this->layout = 'main-login';
+      $model = new ForgetPasswordForm();
+
+      if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+          if (!$model->Email()) {
+              Yii::$app->session->setFlash('Gagal', 'Email tidak ditemukan');
+              return $this->refresh();
+          }
+          else
+          {
+              Yii::$app->session->setFlash('Berhasil', 'Cek Email Anda');
+              return $this->redirect(['site/login']);
+          }
+      }
+      return $this->render('forget', [
+          'model' => $model,
+      ]);
+  }
+
+    public function actionNewPassword($token)
+    {
+       $this->layout = 'main-login';
+       $model = new NewPassword();
+
+       // Untuk mendapatkan token yang ada di tabel user yang dimana sudah di relasikan di anggota model
+       $user = User::findOne(['token' => $token]);
+
+       if ($user === null) {
+           throw new NotFoundHttpException("Halaman tidak ditemukan", 404);
+       }
+
+       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+           $user->password = Yii::$app->getSecurity()->generatePasswordHash($model->new_password);
+           $user->token = Yii::$app->getSecurity()->generateRandomString(50);
+           $user->save();
+           return $this->redirect(['site/login']);
+       }
+
+       return $this->render('new_password', [
+           'model' => $model,
+       ]);
+    }
 
     /**
      * Displays homepage.

@@ -12,17 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kategori-index box box-primary">
     <div class="box-header">
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Tambah Kategori', ['create'], ['class' => 'btn btn-warning']) ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['kategori/daftar-kategori'], ['class' => 'btn btn-info btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Word', ['kategori/daftar-kategori'], ['class' => 'btn btn-info btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['kategori/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Pdf', ['kategori/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['kategori/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Excel', ['kategori/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
     </p>
     </div>
     <div class="box-body">

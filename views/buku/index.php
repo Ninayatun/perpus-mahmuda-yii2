@@ -17,19 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="buku-index box box-primary">
 
     <div class="box-header">
-    <h1><?= Html::encode($this->title) ?></h1>
+    
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Tambah Buku', ['create'], ['class' => 'btn btn-warning']) ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Word </i>', ['buku/jadwal-pl'], ['class' => 'btn btn-primary btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Word', ['buku/jadwal-pl'], ['class' => 'btn btn-primary btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Pdf </i>', ['buku/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Pdf', ['buku/export-pdf'], ['class' => 'btn btn-danger btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> Export Excel </i>', ['buku/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> Export Excel', ['buku/export-excel'], ['class' => 'btn btn-success btn-flat']); ?>
 
-        <?= Html::a('<i class="fa fa-print"> SURAT CERAI WOY </i>', ['buku/surat-cerai2'], ['class' => 'btn btn-primary btn-flat']); ?>
+        <?= Html::a('<i class="fa fa-print"></i> SURAT CERAI', ['buku/surat-cerai2'], ['class' => 'btn btn-primary btn-flat']); ?>
     </p>
     </div>
 
